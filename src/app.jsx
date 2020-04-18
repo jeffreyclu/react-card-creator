@@ -98,25 +98,24 @@ class App extends React.Component {
     const id = e.target.id
     const value = e.target.value
     this.setState(prevState=>{
-      const newCard = prevState.newCard;
+      const newCard = { ...prevState.newCard };
       newCard[id] = value;
-      return { newCard: newCard }
+      return { newCard: newCard };
     })
   }
 
   addNewCard = () => {
     this.setState(prevState=>{
-      const newCard = prevState.newCard;
+      const newCard = {...prevState.newCard };
       newCard["hidden"] = false;
       const newCardList = localStorage.getItem("storedState") ? JSON.parse(localStorage.getItem("storedState")) : [];
       newCardList.push(newCard);
       localStorage.setItem("storedState", JSON.stringify(newCardList));
-      return { cards: newCardList, buttons: genButtons(), difficulties: genDifficulties() };
+      return { cards: newCardList, buttons: genButtons(), difficulties: genDifficulties(), newCard = {} };
     })
   }
 
   deleteCard = (id) => {
-    // console.log(id)
     this.setState(prevState=>{
       const newCardList = JSON.parse(localStorage.getItem("storedState"));
       newCardList.splice(id, 1);
