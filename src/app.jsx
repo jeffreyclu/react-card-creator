@@ -1,8 +1,8 @@
 'use strict';
 
-const genCards = () => {
+const genCards = (data) => {
   if (!localStorage.getItem("storedState")) {
-    return [];
+    return data ? data : [];
   }
   else return JSON.parse(localStorage.getItem("storedState"));
 }
@@ -41,9 +41,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: genCards(),
-      buttons: genButtons(),
-      difficulties: genDifficulties(),
+      cards: [],
+      buttons: [],
+      difficulties: [],
       newCard: {},
     };
     this.showSubmit = this.showSubmit.bind(this);
@@ -53,6 +53,27 @@ class App extends React.Component {
     this.addNewCard = this.addNewCard.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
     this.showAll = this.showAll.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('data.json')
+    .then((response) => {
+      return response.json();
+    }).then((data)=>{
+      const cardsList = data.data;
+      const buttonSet = new Set();
+      cardsList.forEach(card=>{
+        buttonSet.add(card.target);
+      })
+      const difficultySet = new Set();
+      cardsList.forEach(card=>{
+        difficultySet.add(card.difficulty);
+      })
+      const buttonList = Array.from(buttonSet);
+      const difficultyList = Array.from(difficultySet)
+      this.setState({cards: cardsList, buttons: buttonList, difficulties: difficultyList});
+      return localStorage.setItem("storedState", JSON.stringify(cardsList));
+    })
   }
 
   showSubmit = (id) => {
@@ -65,7 +86,6 @@ class App extends React.Component {
 
   filterTarget = (target) => {
     this.setState(prevState=>{
-      console.log('localStorage', JSON.parse(localStorage.getItem("storedState")))
       const storedCardList = JSON.parse(localStorage.getItem("storedState"))
       const newCardList = storedCardList.filter(card=>card.target === target);
       return { cards: newCardList};
@@ -74,7 +94,7 @@ class App extends React.Component {
 
   filterDifficulty = (difficulty) => {
     this.setState(prevState=>{
-      console.log('localStorage', JSON.parse(localStorage.getItem("storedState")))
+      // console.log('localStorage', JSON.parse(localStorage.getItem("storedState")))
       const storedCardList = JSON.parse(localStorage.getItem("storedState"))
       const newCardList = storedCardList.filter(card=>card.difficulty === difficulty);
       return { cards: newCardList};
@@ -103,7 +123,7 @@ class App extends React.Component {
   }
 
   deleteCard = (id) => {
-    console.log(id)
+    // console.log(id)
     this.setState(prevState=>{
       const newCardList = JSON.parse(localStorage.getItem("storedState"));
       newCardList.splice(id, 1);
@@ -157,7 +177,7 @@ const CardsContainer = props => {
 }
 
 const FilterButtons = props => {
-  console.log(props)
+  // console.log(props)
   const { buttons, filterTarget, showAll } = props;
   const buttonList = [];
   for (let i = 0; i < buttons.length; i++) {
@@ -179,7 +199,7 @@ const FilterButton = props => {
 }
 
 const FilterDifficulties = props => {
-  console.log(props)
+  // console.log(props)
   const { difficulties, filterDifficulty, showAll } = props;
   const buttonList = [];
   for (let i = 0; i < difficulties.length; i++) {

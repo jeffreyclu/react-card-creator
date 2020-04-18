@@ -1,0 +1,184 @@
+{
+    "data": [
+        {
+            "title": "Enscape",
+            "target": "Visualization",
+            "description": "Rendering with Enscape is as fast as a snapshot, it can render 3D Plan, 3D Section Elevation Interior exterior landscape perspective VR and 3D animation in just one time working. Enscape, it is designed for a fast architectural and interior rendering. This app works with Rhino, Revit and SketchUp.",
+            "applications": "Revit, Sketchup, Rhino",
+            "duration": "2",
+            "participants": "5",
+            "difficulty": "Intermediate",
+            "hidden": false
+        },
+        {
+            "title": "AutoCAD 1 - Xrefs",
+            "target": "Production",
+            "description": "AutoCAD training –xref best practices",
+            "applications": "AutoCAD, Revit",
+            "duration": "1",
+            "participants": "1-30",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "AutoCAD 2 - Page Setups and Plotting",
+            "target": "Production",
+            "description": "Learn how to control page setups & scaling. How to export to 2D formats. How to plot single and multiple sheets to paper and PDF.",
+            "applications": "AutoCAD, Revit, Bluebeam",
+            "duration": "2",
+            "participants": "1-30",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Newforma 1 - File Transfers",
+            "target": "Production",
+            "description": "Learn how to share information using Newforma. Learn how to create, request, and track transfers. Learn about expiration, reminders, and resending.",
+            "applications": "Newforma",
+            "duration": "1.5",
+            "participants": "1-30",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Newforma 2 - Email Management",
+            "target": "Communication",
+            "description": "Learn how to file emails to a project. Understand searching and reusing email. How to process emails as part of CA workflow.",
+            "duration": "1.5",
+            "participants": "1-30",
+            "applications": "Newforma, Outlook, Webmail",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Dynamo - Fundamentals",
+            "target": "Production",
+            "description": "This training covers the basic fundamentals of how to use Dynamo for Revit. We will explain how Dynamo nodes, list management, code blocks, package installation, and cover an example of how to begin using Dynamo as a production tool to speed up day-to-day workflows and offer greater access to BIM data.  ",
+            "duration": "2",
+            "participants": "1-20",
+            "applications": "Revit, Dynamo",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Dynamo - Revit Model Cleanup",
+            "target": "Production",
+            "description": "This training covers how to cleanup a Revit model using Dynamo. We will go over how to use Dynamo to cleanup items like Dimension Styles, Line Types, and Text Styles which can often get out of control and messy throughout the course of a project. ",
+            "duration": "2",
+            "participants": "1-20",
+            "applications": "Revit, Dynamo",
+            "difficulty": "Intermediate",
+            "hidden": false
+        },
+        {
+            "title": "Dynamo - Revit Warnings Cleanup",
+            "target": "Production",
+            "description": "This training covers how to tackle Revit Model Warnings with Dynamo. It shows how to inspect existing warnings, rank them in order of severity to the model, and discusses how to organize the cleanup process – both within your team and by the use of Dynamo. ",
+            "duration": "1",
+            "participants": "1-20",
+            "applications": "Revit, Dynamo, Excel",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Practice Area Templates",
+            "target": "Standards",
+            "description": "This training covers how to build a practice area template to add to our PE Standards. We will go over the steps for gathering the necessary information, resources, and team members needed to build out a new template as well as the processes needed for accomplishing this task. This training will showcase how this process has been executed in the past and how you can begin to use existing Dynamo files to gather and extract useful data for making decisions on what should be included in your new template.",
+            "duration": "2",
+            "participants": "1-20",
+            "applications": "Revit, Dynamo, Excel",
+            "difficulty": "Intermediate",
+            "hidden": false
+        },
+        {
+            "title": "Revit Health Metrics",
+            "target": "Production",
+            "description": "Users will learn how to use the Revit Model Health Checker to audit the health of Revit models, and how to interpret the results. ",
+            "duration": "2",
+            "participants": "10",
+            "applications": "Revit, Excel",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Optimizing Large Revit Models",
+            "target": "Production",
+            "description": "Users will learn techniques and strategies for optimizing the size of large Revit models (models over 500 MB). Reducing the file size will help to improve load times and overall model performance.",
+            "duration": "4",
+            "participants": "10",
+            "applications": "Revit, Dynamo, CTC BIM Suite",
+            "difficulty": "Advanced",
+            "hidden": false
+        },
+        {
+            "title": "Practice Area Container Files",
+            "target": "Standards",
+            "description": "This initiative will focus on collecting and vetting Revit families that are relevant to each Practice Area..",
+            "duration": "10",
+            "participants": "1-10",
+            "applications": "Revit",
+            "difficulty": "Intermediate",
+            "hidden": false
+        },
+        {
+            "title": "VRay Rendering",
+            "target": "Visualization",
+            "description": "V-ray basic view setup, load existing settings, applying materials. This uses existing PE V-Ray presets and applies them to a render.",
+            "duration": "4",
+            "participants": "1-30",
+            "applications": "Revit, Rhino, Sketchup",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Grasshopper 1",
+            "target": "Design",
+            "description": "Using parametric design to create large-scale massing studies. This application lends itself to an introductory grasshopper course. Subjects to be covered include: parametric modeling, data tree management, referencing geometry. Potential applications include Site Design, Schematic Design, Massing Studies",
+            "duration": "4",
+            "participants": "1-30",
+            "applications": "Grasshopper, Rhino",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Grasshopper Kangaroo Physics",
+            "target": "Design",
+            "description": "Learn how to apply use Kangaroo Physics in Grasshopper for mesh manipulation, circle packing functions, etc. Best if already familiar with data tree manipulation.  ",
+            "duration": "2",
+            "participants": "1-30",
+            "applications": "Grasshopper, Rhino",
+            "difficulty": "Intermediate",
+            "hidden": false
+        },
+        {
+            "title": "Lumion",
+            "target": "Graphics",
+            "description": "Schematic and Design development phases rely heavily on strong visuals. This Lumion course will inform users on how to augment 3D files like .obj or .skp or collada using the application’s rendering tools and environmental effects.",
+            "duration": "2",
+            "participants": "10+",
+            "applications": "Revit, Sketchup, Lumion",
+            "difficulty": "Beginner",
+            "hidden": false
+        },
+        {
+            "title": "Climate Report",
+            "target": "Sustainability",
+            "description": "Learn basics concept of parametric modeling, user interface, able to open and operate a Grasshopper file, Data trees, learn to make multiple massing, and perform a basic Sustainability analysis and display in a standard PE sustainability report in pdf",
+            "hidden": false,
+            "duration": "18",
+            "participants": "15",
+            "applications": "Rhinoceros, Grasshopper, Ladybug",
+            "difficulty": "Beginner"
+        },
+        {
+            "title": "Revit Training",
+            "target": "Production",
+            "description": "Learn Revit",
+            "duration": "1",
+            "participants": "1",
+            "applications": "Revit",
+            "difficulty": "Beginner",
+            "hidden": false
+        }
+    ]
+}

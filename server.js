@@ -25,6 +25,13 @@ const server = http.createServer((request, response) => {
             response.end();
         })
     }
+    else if (method === "GET" && url === '/data.json') {
+        fs.readFile('data.json', (err, data) => {
+            response.setHeader('Content-Type', 'application/json');
+            response.write(data);
+            response.end();
+        })
+    }
     else {
         response.end('404 Error.')
     }

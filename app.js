@@ -10,9 +10,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var genCards = function genCards() {
+var genCards = function genCards(data) {
   if (!localStorage.getItem("storedState")) {
-    return [];
+    return data ? data : [];
   } else return JSON.parse(localStorage.getItem("storedState"));
 };
 
@@ -62,7 +62,6 @@ var App = function (_React$Component) {
 
     _this.filterTarget = function (target) {
       _this.setState(function (prevState) {
-        console.log('localStorage', JSON.parse(localStorage.getItem("storedState")));
         var storedCardList = JSON.parse(localStorage.getItem("storedState"));
         var newCardList = storedCardList.filter(function (card) {
           return card.target === target;
@@ -73,7 +72,7 @@ var App = function (_React$Component) {
 
     _this.filterDifficulty = function (difficulty) {
       _this.setState(function (prevState) {
-        console.log('localStorage', JSON.parse(localStorage.getItem("storedState")));
+        // console.log('localStorage', JSON.parse(localStorage.getItem("storedState")))
         var storedCardList = JSON.parse(localStorage.getItem("storedState"));
         var newCardList = storedCardList.filter(function (card) {
           return card.difficulty === difficulty;
@@ -104,7 +103,7 @@ var App = function (_React$Component) {
     };
 
     _this.deleteCard = function (id) {
-      console.log(id);
+      // console.log(id)
       _this.setState(function (prevState) {
         var newCardList = JSON.parse(localStorage.getItem("storedState"));
         newCardList.splice(id, 1);
@@ -118,9 +117,9 @@ var App = function (_React$Component) {
     };
 
     _this.state = {
-      cards: genCards(),
-      buttons: genButtons(),
-      difficulties: genDifficulties(),
+      cards: [],
+      buttons: [],
+      difficulties: [],
       newCard: {}
     };
     _this.showSubmit = _this.showSubmit.bind(_this);
@@ -134,6 +133,29 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      fetch('data.json').then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        var cardsList = data.data;
+        var buttonSet = new Set();
+        cardsList.forEach(function (card) {
+          buttonSet.add(card.target);
+        });
+        var difficultySet = new Set();
+        cardsList.forEach(function (card) {
+          difficultySet.add(card.difficulty);
+        });
+        var buttonList = Array.from(buttonSet);
+        var difficultyList = Array.from(difficultySet);
+        _this2.setState({ cards: cardsList, buttons: buttonList, difficulties: difficultyList });
+        return localStorage.setItem("storedState", JSON.stringify(cardsList));
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
 
@@ -192,7 +214,7 @@ var CardsContainer = function CardsContainer(props) {
 };
 
 var FilterButtons = function FilterButtons(props) {
-  console.log(props);
+  // console.log(props)
   var buttons = props.buttons,
       filterTarget = props.filterTarget,
       showAll = props.showAll;
@@ -223,7 +245,7 @@ var FilterButton = function FilterButton(props) {
 };
 
 var FilterDifficulties = function FilterDifficulties(props) {
-  console.log(props);
+  // console.log(props)
   var difficulties = props.difficulties,
       filterDifficulty = props.filterDifficulty,
       showAll = props.showAll;
