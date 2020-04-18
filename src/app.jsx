@@ -1,8 +1,8 @@
 'use strict';
 
-const genCards = (data) => {
+const genCards = () => {
   if (!localStorage.getItem("storedState")) {
-    return data ? data : [];
+    return [];
   }
   else return JSON.parse(localStorage.getItem("storedState"));
 }
@@ -17,7 +17,6 @@ const genButtons = () => {
     cardsList.forEach(card=>{
       buttonSet.add(card.target);
     })
-    console.log(Array.from(buttonSet))
     return Array.from(buttonSet)
   }
 }
@@ -32,7 +31,6 @@ const genDifficulties = () => {
     cardsList.forEach(card=>{
       difficultySet.add(card.difficulty);
     })
-    console.log(Array.from(difficultySet))
     return Array.from(difficultySet)
   }
 }
@@ -56,24 +54,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('data.json')
-    .then((response) => {
-      return response.json();
-    }).then((data)=>{
-      const cardsList = data.data;
-      const buttonSet = new Set();
-      cardsList.forEach(card=>{
-        buttonSet.add(card.target);
-      })
-      const difficultySet = new Set();
-      cardsList.forEach(card=>{
-        difficultySet.add(card.difficulty);
-      })
-      const buttonList = Array.from(buttonSet);
-      const difficultyList = Array.from(difficultySet)
-      this.setState({cards: cardsList, buttons: buttonList, difficulties: difficultyList});
-      return localStorage.setItem("storedState", JSON.stringify(cardsList));
-    })
+    if (!localStorage.getItem("storedState")) {
+      fetch('data.json')
+      .then((response) => {
+        return response.json();
+      }).then((data)=>{
+        const cardsList = data.data;
+        localStorage.setItem("storedState", JSON.stringify(cardsList));
+        this.setState({cards: cardsList, buttons: genButtons(), difficulties: genDifficulties()});
+      });
+      return;
+    } else {
+      const cardsList = JSON.parse(localStorage.getItem("storedState"));
+      this.setState({cards: cardsList, buttons: genButtons(), difficulties: genDifficulties()});
+    }
   }
 
   showSubmit = (id) => {
@@ -94,7 +88,6 @@ class App extends React.Component {
 
   filterDifficulty = (difficulty) => {
     this.setState(prevState=>{
-      // console.log('localStorage', JSON.parse(localStorage.getItem("storedState")))
       const storedCardList = JSON.parse(localStorage.getItem("storedState"))
       const newCardList = storedCardList.filter(card=>card.difficulty === difficulty);
       return { cards: newCardList};
@@ -177,7 +170,6 @@ const CardsContainer = props => {
 }
 
 const FilterButtons = props => {
-  // console.log(props)
   const { buttons, filterTarget, showAll } = props;
   const buttonList = [];
   for (let i = 0; i < buttons.length; i++) {
@@ -199,7 +191,6 @@ const FilterButton = props => {
 }
 
 const FilterDifficulties = props => {
-  // console.log(props)
   const { difficulties, filterDifficulty, showAll } = props;
   const buttonList = [];
   for (let i = 0; i < difficulties.length; i++) {

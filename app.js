@@ -10,9 +10,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var genCards = function genCards(data) {
+var genCards = function genCards() {
   if (!localStorage.getItem("storedState")) {
-    return data ? data : [];
+    return [];
   } else return JSON.parse(localStorage.getItem("storedState"));
 };
 
@@ -25,7 +25,6 @@ var genButtons = function genButtons() {
     cardsList.forEach(function (card) {
       buttonSet.add(card.target);
     });
-    console.log(Array.from(buttonSet));
     return Array.from(buttonSet);
   }
 };
@@ -39,7 +38,6 @@ var genDifficulties = function genDifficulties() {
     cardsList.forEach(function (card) {
       difficultySet.add(card.difficulty);
     });
-    console.log(Array.from(difficultySet));
     return Array.from(difficultySet);
   }
 };
@@ -72,7 +70,6 @@ var App = function (_React$Component) {
 
     _this.filterDifficulty = function (difficulty) {
       _this.setState(function (prevState) {
-        // console.log('localStorage', JSON.parse(localStorage.getItem("storedState")))
         var storedCardList = JSON.parse(localStorage.getItem("storedState"));
         var newCardList = storedCardList.filter(function (card) {
           return card.difficulty === difficulty;
@@ -137,23 +134,19 @@ var App = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      fetch('data.json').then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        var cardsList = data.data;
-        var buttonSet = new Set();
-        cardsList.forEach(function (card) {
-          buttonSet.add(card.target);
+      if (!localStorage.getItem("storedState")) {
+        fetch('data.json').then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          var cardsList = data.data;
+          localStorage.setItem("storedState", JSON.stringify(cardsList));
+          _this2.setState({ cards: cardsList, buttons: genButtons(), difficulties: genDifficulties() });
         });
-        var difficultySet = new Set();
-        cardsList.forEach(function (card) {
-          difficultySet.add(card.difficulty);
-        });
-        var buttonList = Array.from(buttonSet);
-        var difficultyList = Array.from(difficultySet);
-        _this2.setState({ cards: cardsList, buttons: buttonList, difficulties: difficultyList });
-        return localStorage.setItem("storedState", JSON.stringify(cardsList));
-      });
+        return;
+      } else {
+        var cardsList = JSON.parse(localStorage.getItem("storedState"));
+        this.setState({ cards: cardsList, buttons: genButtons(), difficulties: genDifficulties() });
+      }
     }
   }, {
     key: "render",
@@ -214,7 +207,6 @@ var CardsContainer = function CardsContainer(props) {
 };
 
 var FilterButtons = function FilterButtons(props) {
-  // console.log(props)
   var buttons = props.buttons,
       filterTarget = props.filterTarget,
       showAll = props.showAll;
@@ -245,7 +237,6 @@ var FilterButton = function FilterButton(props) {
 };
 
 var FilterDifficulties = function FilterDifficulties(props) {
-  // console.log(props)
   var difficulties = props.difficulties,
       filterDifficulty = props.filterDifficulty,
       showAll = props.showAll;
